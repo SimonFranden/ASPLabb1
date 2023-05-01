@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ASPLabb1.Models.ApplicationInfoViewmodel>
+
+@{
+    ViewData["Title"] = "Application List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script>
+    function reloadApplicationList() {        
+        @{
+
+        }
+    }
+</script>
+
+@{
+    List<string> filter = new List<string> { "All", "This Month", };
+    SelectList selectList = new SelectList(filter);
+}
+@Html.DropDownListFor(model => ViewData["selectedFilter"], selectList, new { onchange = "reloadApplicationList();" })
+
+
+    @Html.Partial("ApplicationList", Model);
+
+
