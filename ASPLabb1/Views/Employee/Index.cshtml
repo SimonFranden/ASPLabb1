@@ -5,19 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Anställda</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FName)
+                Namn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LName)
+                Efternamn
             </th>
             <th></th>
         </tr>
@@ -32,7 +30,7 @@
                 @Html.DisplayFor(modelItem => item.LName)
             </td>
             <td>
-                    <a asp-controller="VacationApplication" asp-action="Details" asp-route-id="@item.EmployeeId">Details</a>
+                    <a asp-controller="VacationApplication" asp-action="Details" asp-route-id="@item.EmployeeId">Ledighestsansökningar</a>
             </td>
         </tr>
 }

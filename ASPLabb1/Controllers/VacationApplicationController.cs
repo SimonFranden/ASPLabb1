@@ -23,7 +23,7 @@ namespace ASPLabb1.Controllers
                 ApplicationInfoViewmodel x = new();
                 x.Id = item.Id;
                 x.StartDate = item.StartDate;
-                x.EndDate = item.StartDate;
+                x.EndDate = item.EndDate;
                 x.ApplicationDate = item.ApplicationDate;
                 x.VacationType = item.VacationType;
                 try
@@ -35,6 +35,37 @@ namespace ASPLabb1.Controllers
                     x.EmployeeName = "Employee not found";
                 }
                 infoList.Add(x);
+            }
+
+            ViewData["selectedFilter"] = "All";
+
+            return View(infoList);
+        }
+
+        public ActionResult ByMonth(int date)
+        {
+            var aplList = _context.VacationApplication.ToList();
+            List<ApplicationInfoViewmodel> infoList = new();
+            foreach (VacationApplication item in aplList)
+            {
+                if(item.ApplicationDate.Month == date)
+                {
+                    ApplicationInfoViewmodel x = new();
+                    x.Id = item.Id;
+                    x.StartDate = item.StartDate;
+                    x.EndDate = item.EndDate;
+                    x.ApplicationDate = item.ApplicationDate;
+                    x.VacationType = item.VacationType;
+                    try
+                    {
+                        x.EmployeeName = _context.Employees.SingleOrDefault(e => e.EmployeeId == item.EmployeeId).FName;
+                    }
+                    catch
+                    {
+                        x.EmployeeName = "Employee not found";
+                    }
+                    infoList.Add(x);
+                }                
             }
 
             ViewData["selectedFilter"] = "All";
@@ -56,7 +87,7 @@ namespace ASPLabb1.Controllers
                 ApplicationInfoViewmodel x = new();
                 x.Id = item.Id;
                 x.StartDate = item.StartDate;
-                x.EndDate = item.StartDate;
+                x.EndDate = item.EndDate;
                 x.ApplicationDate = item.ApplicationDate;
                 x.VacationType = item.VacationType;
                 try
@@ -88,10 +119,11 @@ namespace ASPLabb1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(VacationApplication model)
         {
+            model.ApplicationDate = DateTime.Now;
             _context.Add(model);
             _context.SaveChanges();
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: VacationApplicationController/Edit/5

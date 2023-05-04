@@ -1,54 +1,62 @@
 ﻿@model IEnumerable<ASPLabb1.Models.ApplicationInfoViewmodel>
 
 
-<h1>Application List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">+Skapa ledighetsansökan</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                Datum från
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
+                Datum till
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApplicationDate)
+                Ansökningsdatum
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmployeeName)
+                Namn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VacationType)
+                Ledighetstyp
             </th>
-            <th></th>
+            <th>
+                Antal dagar
+            </th>
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-           
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VacationType)
-            </td>
-            <td><a asp-action="Details" asp-route-id="@item.Id">Details</a> </td>
-        </tr>
+
+        @foreach (var item in Model)
+        {
+            TimeSpan difference = item.EndDate - item.StartDate;
+            int numberOfDays = (int)difference.TotalDays;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VacationType)
+                </td>
+                <td>
+                    @numberOfDays
+                </td>
+            </tr>
+        }
+
         
 
 }

@@ -3,23 +3,27 @@
 @{
     ViewData["Title"] = "Application List";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    
 }
 <script>
-    function reloadApplicationList() {        
-        @{
-
-        }
-    }
+    function confirmInput() {
+        var inputDate = document.getElementById("monthInput").value;
+    document.getElementById("date-input").value = inputDate;
+    document.forms[0].submit();
+}
 </script>
 
-@{
-    List<string> filter = new List<string> { "All", "This Month", };
-    SelectList selectList = new SelectList(filter);
-}
-@Html.DropDownListFor(model => ViewData["selectedFilter"], selectList, new { onchange = "reloadApplicationList();" })
+<h1>Ledighetsannsökningar</h1>
 
 
-    @Html.Partial("ApplicationList", Model);
+<form asp-action="ByMonth" method="get">
+    <input type="hidden" name="date" id="date-input">
+    Välj månad: <input id="monthInput" type="number" size="20">
+    <button type="button" onclick="confirmInput()">Submit</button>
+</form>
+
+
+
+ @Html.Partial("ApplicationList", Model);
 
 

@@ -1,29 +1,28 @@
 ﻿@model IEnumerable<ASPLabb1.Models.ApplicationInfoViewmodel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Application List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-
-<h1>Index</h1>
-
 <script>
     function confirmInput() {
-        var inputDate = document.getElementById("monthInput").value;
+    var inputDate = document.getElementById("fname").value;
     document.getElementById("date-input").value = inputDate;
     document.forms[0].submit();
 }
 </script>
 
 
+<h1>Ledighetsannsökningar</h1>
 
 <form asp-action="ByMonth" method="get">
     <input type="hidden" name="date" id="date-input">
-    Enter your name: <input id="monthInput" type="number" size="20">
+    Välj månad: <input id="fname" type="number" size="20">
     <button type="button" onclick="confirmInput()">Submit</button>
 </form>
 
 
+    @Html.Partial("ApplicationList", Model);
 
-@Html.Partial("ApplicationList", Model);
+
