@@ -13,7 +13,7 @@ namespace ASPLabb1.Controllers
         {
             _context = context;
         }
-        // GET: VacationApplicationController
+
         public ActionResult Index()
         {
             var aplList = _context.VacationApplication.ToList();
@@ -73,7 +73,7 @@ namespace ASPLabb1.Controllers
             return View(infoList);
         }
 
-        // GET: VacationApplicationController/Details/5
+ 
         public ActionResult Details(int id)
         {
             var aplList = _context.VacationApplication
@@ -104,7 +104,7 @@ namespace ASPLabb1.Controllers
             return View(infoList);
 
         }
-        // GET: VacationApplicationController/Create
+     
         public ActionResult ApplicationList(ApplicationInfoViewmodel model)
         {
             return PartialView("_MyPartialView", model);
@@ -114,7 +114,7 @@ namespace ASPLabb1.Controllers
             return View();
         }
 
-        // POST: VacationApplicationController/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(VacationApplication model)
@@ -126,46 +126,5 @@ namespace ASPLabb1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: VacationApplicationController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: VacationApplicationController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: VacationApplicationController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: VacationApplicationController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
